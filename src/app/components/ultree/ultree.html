@@ -1,0 +1,13 @@
+<details>
+    <summary>
+        <ng-content select="[tree-header]"></ng-content>
+    </summary>
+
+    <div class="detail-body">
+        <div #verticalLine class="vertical-line"></div>
+
+        <div #treeBody class="tree-body">
+            <ng-content select="[tree-body]"></ng-content>
+        </div>
+    </div>
+</details>
