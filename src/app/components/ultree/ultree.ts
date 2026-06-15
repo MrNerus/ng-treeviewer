@@ -15,23 +15,40 @@ export class Ultree {
   @ViewChild('verticalLine')
   verticalLine!: ElementRef<HTMLElement>;
     private resizeObserver?: ResizeObserver;
+    private observer!: MutationObserver;
+
 ;
 
   ngAfterViewInit(): void {
     this.updateLineHeight();
+    this.setHorizontalLine();
 
     this.resizeObserver = new ResizeObserver(() => {
       this.updateLineHeight();
     });
 
     this.resizeObserver.observe(this.treeBody.nativeElement);
+
+    this.observer = new MutationObserver(() => {
+      this.setHorizontalLine();
+    });
+
+    this.observer.observe(this.treeBody.nativeElement, {
+      childList: true,
+      subtree: true
+    });
   }
 
   private updateLineHeight(): void {
     const body = this.treeBody.nativeElement;
     const line = this.verticalLine.nativeElement;
 
-    const lastChild = body.lastElementChild?.lastElementChild as HTMLElement;
+    let lastChild = body.lastElementChild?.lastElementChild as HTMLElement;
+    
+    if (lastChild?.tagName.toLowerCase() === 'app-ultree') {
+      lastChild = lastChild
+      .querySelector('details > summary') as HTMLElement;
+    }
 
     if (!lastChild) {
       return;
@@ -42,8 +59,24 @@ export class Ultree {
 
     const height = (lastRect.top - bodyRect.top) + (lastRect.height / 2);
 
-    console.log({ "lastRect.top": lastRect.top, "bodyRect.top": bodyRect.top, "lastRect.height": lastRect.height, "height": height  })
-
     line.style.height = `${height}px`;
+  }
+
+  private setHorizontalLine(): void {
+    const body = this.treeBody.nativeElement;
+
+    Array.from(body.children).forEach((child) => {
+      const el = child as HTMLElement;
+
+      if (el.tagName.toLowerCase() === 'app-ultree') {
+        const summary = el.querySelector('details > summary') as HTMLElement;
+
+        if (summary) {
+          summary.classList.add('tree-horizontal-line');
+        }
+      } else {
+        el.classList.add('tree-horizontal-line');
+      }
+    });
   }
 }

@@ -1,52 +1,47 @@
 details {
     interpolate-size: allow-keywords;
     overflow: clip;
-    border: 1px solid #dddddd;
-    background: #ffffff;
-    color: #333333;
-    border-radius: 3px;
-
+    border-radius: 0.25rem;
+    
     .detail-body {
         position: relative;
-        padding-left: 1rem;
-
+        
         .vertical-line {
             position: absolute;
             top: 0;
             left: 0;
-            width: 2px;
-            background-color: #000;
-
-            /* Angular will set this */
+            width: 1px;
+            border-left: 1px dotted #000;
             height: 0;
         }
     }
 }
 
-details summary {
+summary {
     display: block;
     cursor: pointer;
     position: relative;
-    padding: 0.5em 0.5em 0.5em 0.7em;
-    background: #ededed;
-    color: #2b2b2b;
-    border-radius: 3px 3px 0 0;
+    border-radius: 4px;
+    background-color: #fff0;
+    padding: 0.5rem 0rem ;
+}
+summary .tree-header-wrapper {
+    display: flex;
+    gap: 1rem;
 }
 
-details:not([open]) summary:hover,
-details:not([open]) summary:focus {
-    background: #f6f6f6;
-    color: #454545;
-}
 
-details[open] summary {
-    outline: 1px solid #003eff;
-    background: #007fff;
-    color: #ffffff;
+details > summary:hover,
+details > summary:focus  {
+    background-color: #bbb;
 }
 
 details[open]::details-content {
     height: auto;
+}
+
+details .tree-body {
+    padding: 0.5rem 0rem 0.5rem 1rem;
 }
 
 details::details-content {
@@ -57,6 +52,20 @@ details::details-content {
         height 475ms;
 }
 
-details main {
-    padding: 1em 2.2em;
+// details main {
+//     padding: 1em 2.2em;
+// }
+
+.tree-horizontal-line {
+  position: relative;
+}
+
+.tree-horizontal-line::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -1rem;
+  width: 1rem;
+  border-top: 1px dotted #000;
+  transform: translateY(-50%);
 }

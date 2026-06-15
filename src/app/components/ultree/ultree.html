@@ -1,6 +1,9 @@
 <details>
     <summary>
-        <ng-content select="[tree-header]"></ng-content>
+        <div class="tree-header-wrapper">
+            <div class="handle">❭</div>
+            <ng-content select="[tree-header]"></ng-content>
+        </div>
     </summary>
 
     <div class="detail-body">
