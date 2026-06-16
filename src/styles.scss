@@ -3,3 +3,17 @@
             margin: 0;
             box-sizing: border-box;
         }
+
+    .tree-horizontal-line {
+  position: relative;
+}
+
+.tree-horizontal-line::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -1rem;
+  width: 1rem;
+  border-top: 1px dotted #000;
+  transform: translateY(-50%);
+}

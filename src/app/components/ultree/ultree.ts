@@ -63,20 +63,24 @@ export class Ultree {
   }
 
   private setHorizontalLine(): void {
-    const body = this.treeBody.nativeElement;
-
-    Array.from(body.children).forEach((child) => {
-      const el = child as HTMLElement;
-
-      if (el.tagName.toLowerCase() === 'app-ultree') {
-        const summary = el.querySelector('details > summary') as HTMLElement;
-
-        if (summary) {
-          summary.classList.add('tree-horizontal-line');
+    const body = this.treeBody.nativeElement.lastElementChild;
+    
+    
+    if (body) {
+      Array.from(body.children).forEach((child) => {
+        const el = child as HTMLElement;
+        console.log(el);
+  
+        if (el.tagName.toLowerCase() === 'app-ultree') {
+          const summary = el.querySelector('details > summary') as HTMLElement;
+  
+          if (summary) {
+            summary.classList.add('tree-horizontal-line');
+          }
+        } else {
+          el.classList.add('tree-horizontal-line');
         }
-      } else {
-        el.classList.add('tree-horizontal-line');
-      }
-    });
+      });
+    }
   }
 }

@@ -1,6 +1,5 @@
 details {
     interpolate-size: allow-keywords;
-    overflow: clip;
     border-radius: 0.25rem;
     
     .detail-body {
@@ -56,16 +55,16 @@ details::details-content {
 //     padding: 1em 2.2em;
 // }
 
-.tree-horizontal-line {
-  position: relative;
-}
+// .tree-horizontal-line {
+//   position: relative;
+// }
 
-.tree-horizontal-line::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -1rem;
-  width: 1rem;
-  border-top: 1px dotted #000;
-  transform: translateY(-50%);
-}
+// .tree-horizontal-line::before {
+//   content: '';
+//   position: absolute;
+//   top: 50%;
+//   left: -1rem;
+//   width: 1rem;
+//   border-top: 1px dotted #000;
+//   transform: translateY(-50%);
+// }
