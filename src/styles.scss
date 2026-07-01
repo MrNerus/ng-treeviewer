@@ -5,12 +5,12 @@
 }
 
 :root {
-  --nested-padding: 2rem; // 1.5rem
-  --child-block-padding: 0.25rem; // top and bottom padding 
-  --child-height: 1rem; // top and bottom padding 
-  --guide-line: 1.5px solid #ccc; // uses border
-  --guide-line-corner-radius: 0.5rem; // uses border-bottom-left-radius
-  --spacing: 0.5rem;
+  --tree-nested-padding: 2rem; // 1.5rem
+  --tree-spacing: 0.5rem;
+  --tree-child-block-padding: 0.25rem; // top and bottom padding 
+  --tree-child-height: 3rem; // top and bottom padding 
+  --tree-guide-line: 1.5px solid #ccc; // uses border
+  --tree-guide-line-corner-radius: 0.5rem; // uses border-bottom-left-radius
 }
 
 .tree-horizontal-line {
@@ -29,8 +29,8 @@
 
 .tree-branch-container > * {
     position: relative;
-    padding-left: var(--nested-padding);
-    padding-block: var(--child-block-padding);
+    padding-left: calc(var(--tree-nested-padding) + var(--tree-spacing));
+    padding-block: var(--tree-child-block-padding);
 }
 
 
@@ -41,12 +41,12 @@
     // top: -0.5rem; 
     transform: translateY(-50%);
     left: 0;
-    width: calc(var(--nested-padding) - var(--spacing)); 
-    height: calc(var(--child-height) + var(--child-block-padding) / 2); 
+    width: calc(var(--tree-nested-padding)); 
+    height: calc(var(--tree-child-height) + var(--tree-child-block-padding) / 2); 
   
-    border-left: var(--guide-line);
-    border-bottom: var(--guide-line);
-    border-bottom-left-radius: var(--guide-line-corner-radius); 
+    border-left: var(--tree-guide-line);
+    border-bottom: var(--tree-guide-line);
+    border-bottom-left-radius: var(--tree-guide-line-corner-radius); 
         
     /* THE FIX: Match your page background color to hide the line underneath */
     background-color: #ffffff; 
@@ -57,10 +57,10 @@
 .tree-branch-container > *:not(:last-child)::after {
     content: '';
     position: absolute;
-    top: -0.25rem; /* Start from the very top */
-    bottom: -0.25rem; 
+    top: 0;
+    bottom: 0; 
     left: 0;
     
-    border-left: var(--guide-line);
+    border-left: var(--tree-guide-line);
     z-index: 0; 
 }
