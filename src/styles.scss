@@ -1,19 +1,66 @@
  * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-    .tree-horizontal-line {
-  position: relative;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-.tree-horizontal-line::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -1rem;
-  width: 1rem;
-  border-top: 1px dotted #000;
-  transform: translateY(-50%);
+:root {
+  --nested-padding: 2rem; // 1.5rem
+  --child-block-padding: 0.25rem; // top and bottom padding 
+  --child-height: 1rem; // top and bottom padding 
+  --guide-line: 1.5px solid #ccc; // uses border
+  --guide-line-corner-radius: 0.5rem; // uses border-bottom-left-radius
+  --spacing: 0.5rem;
+}
+
+.tree-horizontal-line {
+    position: relative;
+}
+
+
+/* Container for the projected items */
+.tree-branch-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tree-branch-container > * {
+    position: relative;
+    padding-left: var(--nested-padding);
+    padding-block: var(--child-block-padding);
+}
+
+
+/* 1. The L-Shape (Masks the trunk above it) */
+.tree-branch-container > *::before {
+    content: '';
+    position: absolute;
+    // top: -0.5rem; 
+    transform: translateY(-50%);
+    left: 0;
+    width: calc(var(--nested-padding) - var(--spacing)); 
+    height: calc(var(--child-height) + var(--child-block-padding) / 2); 
+  
+    border-left: var(--guide-line);
+    border-bottom: var(--guide-line);
+    border-bottom-left-radius: var(--guide-line-corner-radius); 
+        
+    /* THE FIX: Match your page background color to hide the line underneath */
+    background-color: #ffffff; 
+    z-index: 1; 
+  }
+  
+  /* 2. The Continuing Trunk (Runs the entire length now) */
+.tree-branch-container > *:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: -0.25rem; /* Start from the very top */
+    bottom: -0.25rem; 
+    left: 0;
+    
+    border-left: var(--guide-line);
+    z-index: 0; 
 }
